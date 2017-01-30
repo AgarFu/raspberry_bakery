@@ -1,0 +1,22 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+transport:
+  name: sshtar
+  compression: zlib
+  compression_level: 9
+
+platforms:
+  - name: centos-7.2
+
+suites:
+  - name: default
+    run_list:
+      - recipe[raspberry_bakery::default]
+      - recipe[raspberry_bakery::raspbian]
+      - recipe[raspberry_bakery::centos]
+    attributes:

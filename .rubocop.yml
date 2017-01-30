@@ -1,0 +1,44 @@
+AlignParameters:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+LineLength:
+  Max: 265
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: false
+
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
+RedundantBegin:
+  Enabled: false
+
+Style/CommandLiteral:
+  EnforcedStyle: percent_x
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+UselessAssignment:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/FileName:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false

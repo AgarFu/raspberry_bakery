@@ -1,0 +1,89 @@
+{
+    "builders": [
+        {
+            "accelerator": "tcg",
+            "boot_command": [
+            ],
+            "boot_wait": "1m",
+            "disk_size": 5000,
+            "format": "qcow2",
+            "headless": true,
+            "iso_checksum": "{{user `sum_local`}}",
+            "iso_checksum_type": "md5",
+            "iso_url": "{{user `url_local`}}",
+            "output_directory": "hello_world",
+            "qemu_binary": "qemu-system-arm",
+            "qemuargs": [
+                [
+                    "-m",
+                    "256"
+                ],
+                [
+                    "-machine",
+                    "versatilepb"
+                ],
+                [
+                    "-cpu",
+                    "arm1176"
+                ],
+                [
+                    "-kernel",
+                    "{{user `kernel`}}"
+                ],
+                [
+                    "-append",
+                    "root=/dev/sda2 mem=256M panic=1 rootfstype=ext4 rw console=ttyAMA0"
+                ],
+                [
+                    "-name",
+                    "Qemu-hello_world"
+                ],
+                [
+                    "-serial",
+                    "stdio"
+                ],
+                [
+                    "-no-reboot"
+                ],
+                [
+                    "-hda",
+                    "{{user `url_local`}}"
+                ],
+                [
+                    "-net",
+                    "nic,macaddr=00:16:3e:00:00:01"
+                ],
+                [
+                    "-netdev",
+                    "user,id=user.0"
+                ],
+                [
+                    "-net",
+                    "user,hostfwd=tcp::2223-:22"
+                ],
+                [
+                    "-display",
+                    "{{user `display`}}"
+                ]
+            ],
+            "shutdown_command": "echo '{{user `password`}}' | sudo shutdown now",
+            "shutdown_timeout":"5m",
+            "ssh_host_port_min": 2223,
+            "ssh_host_port_max": 2223,
+            "ssh_port": 22,
+            "ssh_password": "raspberry",
+            "ssh_username": "pi",
+            "ssh_wait_timeout": "10m",
+            "type": "qemu",
+            "vm_name": "Raspbian-Forged"
+        }
+    ],
+    "variables": {
+        "password": "raspberry",
+        "sum_local": "<%= @raspbian_sum%>",
+        "url_local": "<%= @raspbian_filename %>",
+        "user": "pi",
+        "display" : "none",
+        "kernel" : "<%= @raspbian_kernel %>"
+    }
+}
